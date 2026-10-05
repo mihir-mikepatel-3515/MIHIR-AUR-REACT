@@ -1,15 +1,21 @@
-import { useState } from "react";
+import { useEffect } from "react";
 
-const Counter = () => {
-  const [count, setCount] = useState(0);
-  const[rCount,setRCount]=useState(0);
+const Counter = ({ count, data }) => {
+  useEffect(() => {
+    console.log("mounting phase only");
+  }, []);
 
+  useEffect(() => {
+    console.log("update phase only");
+  }, [count]);
+
+  useEffect(() => {
+    return () => {
+      console.log("unmounting phase only");}});
   return (
     <div>
-      <h1>counter: {count}</h1>
-<button onClick={() => setCount(count + 1)}>Increment</button>
-<br/>
-<button onClick={() => setCount(count - 1)}>Decrement</button>
+      <h1>Counter Value {count}</h1>
+      <h1>Data Value {data}</h1>
     </div>
   );
 };
